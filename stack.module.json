@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "node-exporter",
+  "repo": "node-exporter-stack-module",
+  "runtimeId": "node-exporter",
+  "lifecycle": "active",
+  "dependencies": [
+    "prometheus",
+    "stack-foundation"
+  ],
+  "overlays": [
+    "stack.compose/node-exporter.yml"
+  ]
+}
