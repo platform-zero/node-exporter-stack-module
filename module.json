@@ -1,0 +1,43 @@
+{
+  "configuration": {
+    "schema": {
+      "additionalProperties": false,
+      "properties": {},
+      "type": "object"
+    }
+  },
+  "id": "node-exporter",
+  "overlays": [
+    "stack.compose/node-exporter.yml",
+    "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/NodeExporterMonitoringTests.kt"
+  ],
+  "provides": [
+    {
+      "capability": "module:node-exporter",
+      "version": "1"
+    }
+  ],
+  "requires": [
+    {
+      "capability": "module:prometheus",
+      "version": "1"
+    },
+    {
+      "capability": "module:stack-foundation",
+      "version": "1"
+    }
+  ],
+  "schemaVersion": 1,
+  "services": [
+    {
+      "name": "node-exporter",
+      "routes": [],
+      "volumes": []
+    }
+  ],
+  "verification": {
+    "commands": [
+      "test -f stack.module.json && test -f module.json"
+    ]
+  }
+}
