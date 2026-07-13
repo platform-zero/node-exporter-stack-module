@@ -19,7 +19,8 @@
   "smokeUnsupportedReason": "requires generated bundle context, deployed networking, secrets, or service dependencies",
   "overlays": [
     "stack.compose/node-exporter.yml",
-    "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/NodeExporterMonitoringTests.kt"
+    "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/NodeExporterMonitoringTests.kt",
+    "stack.runtime.yaml"
   ],
   "testAssets": []
 }
