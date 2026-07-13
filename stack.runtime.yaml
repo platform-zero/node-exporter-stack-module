@@ -1,0 +1,36 @@
+---
+schemaVersion: 1
+module: "node-exporter"
+target: "observability"
+services:
+  node-exporter:
+    image: "prom/node-exporter:v1.10.2"
+    containerName: "node-exporter"
+    lifecycle: "daemon"
+    updatePolicy: "registry"
+    placement: "rootful"
+    networks:
+    - "monitoring"
+    volumes:
+    - "/:/host:ro,rslave"
+    - "/sys:/host/sys:ro"
+    - "/proc:/host/proc:ro"
+    health:
+      test:
+      - "CMD"
+      - "wget"
+      - "--quiet"
+      - "--tries=1"
+      - "-O"
+      - "/dev/null"
+      - "http://localhost:9100/metrics"
+      interval: "60s"
+      timeout: "10s"
+      retries: 3
+      start_period: "10s"
+    command:
+    - "--path.rootfs=/host"
+    - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    restart: "unless-stopped"
+networks: {}
+volumes: {}
