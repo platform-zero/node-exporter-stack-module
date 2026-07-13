@@ -6,15 +6,10 @@ import org.webservices.testrunner.framework.*
 
 suspend fun TestRunner.nodeExporterMonitoringTests() = suite("Node Exporter Monitoring Tests") {
 test("Node Exporter metrics endpoint") {
-        val endpoint = System.getenv("NODE_EXPORTER_URL")
-            ?.trim()
-            ?.trimEnd('/')
-            ?.takeIf { it.isNotEmpty() }
-            ?: "http://host.containers.internal:19100"
-        val response = client.getRawResponse("$endpoint/metrics")
+        val response = client.postRaw("${env.endpoints.prometheus}/api/v1/query?query=node_uname_info")
         response.status shouldBe HttpStatusCode.OK
         val body = response.bodyAsText()
-        body shouldContain "node_"  
-        println("      ✓ Node Exporter providing system metrics")
+        body shouldContain "node_uname_info"
+        println("      ✓ Node Exporter metrics are available through Prometheus")
     }
 }

@@ -15,8 +15,6 @@ services:
     - "/:/host:ro,rslave"
     - "/sys:/host/sys:ro"
     - "/proc:/host/proc:ro"
-    ports:
-    - "127.0.0.1:19100:9100"
     health:
       test:
       - "CMD"
